@@ -2,9 +2,8 @@ package guru.springframework.spring6restmvc.services;
 
 import guru.springframework.spring6restmvc.model.Customer;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -12,7 +11,7 @@ import java.util.UUID;
  */
 public interface CustomerService {
 
-    Customer getCustomerById(UUID uuid);
+    Optional<Customer> getCustomerById(UUID uuid);
 
     List<Customer> getAllCustomers();
 
