@@ -1,25 +1,25 @@
 package guru.springframework.spring6restmvc.model;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.Data;
 
-import java.math.BigDecimal;
+
 import java.time.LocalDateTime;
 import java.util.UUID;
 
 /**
  * Created by jt, Spring Framework Guru.
  */
-@Builder
 @Data
-public class Beer {
+@Builder
+public class CustomerDTO {
     private UUID id;
+    @NotNull
+    @NotBlank
+    private String name;
     private Integer version;
-    private String beerName;
-    private BeerStyle beerStyle;
-    private String upc;
-    private Integer quantityOnHand;
-    private BigDecimal price;
     private LocalDateTime createdDate;
     private LocalDateTime updateDate;
 }
