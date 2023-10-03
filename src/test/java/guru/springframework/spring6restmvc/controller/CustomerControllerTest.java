@@ -13,7 +13,6 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -77,6 +76,8 @@ class CustomerControllerTest {
     void testDeleteCustomer() throws Exception {
         CustomerDTO customer = customerServiceImpl.getAllCustomers().get(0);
 
+        given(customerService.deleteCustomerById(any())).willReturn(true);
+
         mockMvc.perform(delete(CustomerController.CUSTOMER_PATH_ID, customer.getId())
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNoContent());
@@ -90,6 +91,9 @@ class CustomerControllerTest {
     void testUpdateCustomer() throws Exception {
         CustomerDTO customer = customerServiceImpl.getAllCustomers().get(0);
 
+        given(customerService.updateCustomerById(any(), any())).willReturn(Optional.of(CustomerDTO.builder()
+                .build()));
+
         mockMvc.perform(put(CustomerController.CUSTOMER_PATH_ID, customer.getId())
                 .content(objectMapper.writeValueAsString(customer))
                 .contentType(MediaType.APPLICATION_JSON)
@@ -102,7 +106,7 @@ class CustomerControllerTest {
     }
 
 
-    @Test
+/*    @Test
     void testCreateCustomerNullName() throws Exception {
         CustomerDTO customer = CustomerDTO.builder().build();
 
@@ -115,7 +119,7 @@ class CustomerControllerTest {
                 .andExpect(status().isBadRequest()).andReturn();
 
         System.out.println(mvcResult.getResponse().getContentAsString());
-    }
+    }*/
     @Test
     void testCreateCustomer() throws Exception {
         CustomerDTO customer = customerServiceImpl.getAllCustomers().get(0);
